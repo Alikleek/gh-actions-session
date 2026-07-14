@@ -1,0 +1,15 @@
+{
+  "name": "wf2-taskboard",
+  "version": "1.0.0",
+  "description": "Small Express app with a simple UI, used for the Docker build & push workflow session.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
