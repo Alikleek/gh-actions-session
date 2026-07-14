@@ -31,6 +31,11 @@ A workflow file at `.github/workflows/first.yml` that:
 3. Pick the inputs and run it. Try it once with `run_extra = true` and once with
    `run_extra = false` and watch how the `extra` job is skipped the second time.
 
+> **Note:** GitHub only shows/triggers a `workflow_dispatch` workflow once the
+> workflow file exists on the repository's **default branch**. If you don't see a
+> **Run workflow** button, make sure your workflow file has been merged/pushed to the
+> default branch (or run it against your branch after the file is present there).
+
 ## Reference / cheatsheet
 
 - [Manually running a workflow](https://docs.github.com/actions/using-workflows/manually-running-a-workflow)
