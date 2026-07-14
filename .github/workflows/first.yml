@@ -1,0 +1,44 @@
+name: First Workflow - Manual Dispatch
+
+# Triggered manually from the Actions tab (no push/PR triggers).
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        type: choice
+        required: true
+        default: dev
+        options:
+          - dev
+          - staging
+          - prod
+      name:
+        description: "Who is running this deploy?"
+        type: string
+        required: true
+        default: "student"
+      run_extra:
+        description: "Run the optional extra job?"
+        type: boolean
+        required: true
+        default: true
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print a message from the inputs
+        run: |
+          echo "Hello ${{ inputs.name }}!"
+          echo "You chose to deploy to: ${{ inputs.environment }}"
+          echo "run_extra = ${{ inputs.run_extra }}"
+
+  # This job is SKIPPED unless run_extra is true.
+  extra:
+    needs: greet
+    if: ${{ inputs.run_extra == true }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extra step
+        run: echo "The extra job ran because run_extra was true."
