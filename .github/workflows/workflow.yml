@@ -1,11 +1,29 @@
-name: manually triggered workflow
 
+name: First Workflow - Manual Dispatch
+
+# Triggered manually from the Actions tab (no push/PR triggers).
 on:
   workflow_dispatch:
     inputs:
-        environment: { type: choice, options: [dev,staging,prod] }
-        name: { type: string, default: student }
-        run_extra: { type: boolean, default: true }
+      environment:
+        description: "Target environment"
+        type: choice
+        required: true
+        default: dev
+        options:
+          - dev
+          - staging
+          - prod
+      name:
+        description: "Who is running this deploy?"
+        type: string
+        required: true
+        default: "student"
+      run_extra:
+        description: "Run the optional extra job?"
+        type: boolean
+        required: true
+        default: true
 
 jobs:
   greet:
