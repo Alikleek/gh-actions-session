@@ -1,4 +1,3 @@
-
 name: First Workflow - Manual Dispatch
 
 # Triggered manually from the Actions tab (no push/PR triggers).
