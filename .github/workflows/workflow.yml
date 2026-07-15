@@ -1,0 +1,27 @@
+name: manually triggered workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+        environment: { type: choice, options: [dev,staging,prod] }
+        name: { type: string, default: student }
+        run_extra: { type: boolean, default: true }
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print a message from the inputs
+        run: |
+          echo "Hello ${{ inputs.name }}!"
+          echo "You chose to deploy to: ${{ inputs.environment }}"
+          echo "run_extra = ${{ inputs.run_extra }}"
+
+  # This job is SKIPPED unless run_extra is true.
+  extra:
+    needs: greet
+    if: ${{ inputs.run_extra == true }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extra step
+        run: echo "The extra job ran because run_extra was true."
